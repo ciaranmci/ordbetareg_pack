@@ -732,7 +732,7 @@ ordbetareg <- function(formula=NULL,
 
   # For pulling posterior predictions
 
-  posterior_predict_ord_beta_reg <- function(i, draws, ...) {
+  posterior_predict_ord_beta_reg <- function(i, prep, ...) {
 
     get_args <- list(...)
 
@@ -746,11 +746,11 @@ ordbetareg <- function(formula=NULL,
 
     }
 
-    mu <- brms::get_dpar(draws, "mu", i = i)
-    phi <- brms::get_dpar(draws, "phi", i = i)
-    cutzero <- brms::get_dpar(draws, "cutzero", i = i)
-    cutone <- brms::get_dpar(draws, "cutone", i = i)
-    N <- draws$ndraws
+    mu <- brms::get_dpar(prep, "mu", i = i)
+    phi <- brms::get_dpar(prep, "phi", i = i)
+    cutzero <- brms::get_dpar(prep, "cutzero", i = i)
+    cutone <- brms::get_dpar(prep, "cutone", i = i)
+    N <- prep$ndraws
 
     thresh1 <- cutzero
     thresh2 <- cutzero + exp(cutone)
